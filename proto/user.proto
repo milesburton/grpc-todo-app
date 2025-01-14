@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package todo;
+
+message User {
+  string userId = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UserRequest {
+  User user = 1;
+}
+
+message UserIdRequest {
+  string userId = 1;
+}
+
+message UserResponse {
+  User user = 1;
+}
+
+service UserService {
+  rpc CreateUser (UserRequest) returns (UserResponse);
+  rpc GetUser (UserIdRequest) returns (UserResponse);
+}

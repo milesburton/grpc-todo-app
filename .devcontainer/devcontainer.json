@@ -1,0 +1,41 @@
+{
+  "name": "gRPC TypeScript Dev Container",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "forwardPorts": [50051],
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "postCreateCommand": "sudo chown -R node:node /workspaces/grpc-todo-app && npm install",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "terminal.integrated.defaultProfile.linux": "fish",
+        "terminal.integrated.profiles.linux": {
+          "fish": {
+            "path": "/usr/bin/fish"
+          }
+        }
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "grpcfuse.grpc-support",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "username": "node",
+      "upgradePackages": false
+    }
+  }
+}

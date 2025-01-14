@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package todo;
+
+message Task {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+}
+
+message TaskRequest {
+  Task task = 1;
+}
+
+message TaskResponse {
+  Task task = 1;
+}
+
+message TaskIdRequest {
+  string id = 1;
+}
+
+message TaskListResponse {
+  repeated Task tasks = 1;
+}
+
+service TaskService {
+  rpc CreateTask (TaskRequest) returns (TaskResponse);
+  rpc GetTask (TaskIdRequest) returns (TaskResponse);
+  rpc UpdateTask (TaskRequest) returns (TaskResponse);
+  rpc DeleteTask (TaskIdRequest) returns (TaskResponse);
+  rpc ListTasks (google.protobuf.Empty) returns (TaskListResponse);
+}

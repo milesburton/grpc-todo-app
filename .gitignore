@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Optional: If you want to ignore generated gRPC stubs, uncomment:
+# src/generated/
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# VS Code settings
+.vscode/
+
+# Docker
+docker-compose.yml
+.dockerignore
+
+# Environment files
+.env
+
+# Do not commit the setup script
+setup.sh
