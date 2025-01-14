@@ -1,11 +1,23 @@
 {
   "name": "gRPC TypeScript Dev Container",
-  "dockerFile": "Dockerfile",
   "context": "..",
-  "forwardPorts": [50051],
+  "dockerFile": "Dockerfile",
+
+  // Use the non-root 'node' user, matching the Dockerfile's USER node
   "remoteUser": "node",
   "updateRemoteUserUID": true,
-  "postCreateCommand": "sudo chown -R node:node /workspaces/grpc-todo-app && npm install",
+
+  // Forward the gRPC port
+  "forwardPorts": [50051],
+
+  // Define a named volume "my-ssh-keys" mounted at /home/node/.ssh
+  // Docker auto-creates the volume if it doesn't exist
+  "mounts": [
+    "type=volume,source=my-ssh-keys,target=/home/node/.ssh"
+  ],
+
+  "postCreateCommand": "sudo chown -R node:node ~/.ssh || true && sudo chmod 700 ~/.ssh || true && sudo chmod 600 ~/.ssh/* || true",
+
   "customizations": {
     "vscode": {
       "settings": {
@@ -21,19 +33,24 @@
           }
         }
       },
+      // VS Code extensions to install inside the container
       "extensions": [
-        "ms-azuretools.vscode-docker",
-        "grpcfuse.grpc-support",
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
-        "ms-vscode.vscode-typescript-next",
-        "streetsidesoftware.code-spell-checker"
+        "ms-azuretools.vscode-docker",      // Docker integration
+        "grpcfuse.grpc-support",            // gRPC syntax highlighting
+        "esbenp.prettier-vscode",           // Prettier code formatter
+        "dbaeumer.vscode-eslint",           // ESLint
+        "ms-vscode.vscode-typescript-next", // Latest TS intellisense
+        "streetsidesoftware.code-spell-checker", // Spell checker
+        "github.copilot",                   // GitHub Copilot (optional)
+        "ms-vscode-remote.remote-containers" // Dev Containers extension
       ]
     }
   },
+
+  // Optional: Common dev container utilities
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": true,
+      "installZsh": false,    // We already install fish manually
       "username": "node",
       "upgradePackages": false
     }
