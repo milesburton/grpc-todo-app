@@ -17,7 +17,7 @@
     "@grpc/proto-loader": "^0.6.9"
   },
   "devDependencies": {
-    "grpc-tools": "^1.11.2",
+    "grpc-tools": "^1.13.1",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.1",
     "ts-proto": "^1.137.0",
